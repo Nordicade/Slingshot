@@ -20,8 +20,9 @@ namespace SlingshotAnimation
         Point down;
 
         List<TrajectoryA> list;
+        List<TrajectoryA> toBeRemoved;
 
-            
+
         public Form1A()
         {
 
@@ -29,13 +30,15 @@ namespace SlingshotAnimation
             Timer t = new Timer();
             Graphics g = this.CreateGraphics();
             list = new List<TrajectoryA>();
+            toBeRemoved = new List<TrajectoryA>();
             windowWidth = this.Width;
             windowHeight = this.Height;
             this.BackColor = Color.White;
             t.Start();
-            t.Interval = 15;
+            t.Interval = 50;
             t.Tick += T_Tick;
-
+            MouseDown += Form1A_MouseDown;
+            MouseUp += Form1A_MouseUp;
         }
 
        
@@ -43,16 +46,52 @@ namespace SlingshotAnimation
         {
             tickCount++;
 
-            Graphics g = this.CreateGraphics();
+           Graphics g = this.CreateGraphics();
            foreach(TrajectoryA shape in list)
-            {
+           {                
                 //update redraw the current shape in white pen
                 Point end = shape.FindFinalPos(tickCount);
-                g.DrawEllipse(new Pen(Brushes.White), new Rectangle(shape.down.X, shape.down.Y, 5, 5));
+                // g.DrawEllipse(new Pen(Brushes.White), new Rectangle(shape.down.X, shape.down.Y, 5, 5));
 
-                //increment t and redraw in black pen
+                //check if end.X or end.Y is out of frame
+                if (end.X >= windowWidth || end.Y >= windowHeight || end.X <= 0)
+                {
+                    toBeRemoved.Add(shape);
+                    if(end.X >= windowWidth || end.X <= 0)
+                    {
+                        WallBounce(shape, new Point(end.X, end.Y));
+                    }
+                    if(end.Y >= windowHeight)
+                    {
+
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        //increment t and redraw in black pen
+                        g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(end.X, end.Y, 5, 5));
+                        //g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(shape.down.X, shape.down.Y, 5, 5));
+                    }
+                    catch(Exception)
+                    {
+                        g.DrawString("x=" + end.X + "y=" + end.Y, DefaultFont, Brushes.Black, new Point(5,5));
+                    }
+                }
             }
-           
+           foreach(TrajectoryA shape in toBeRemoved)
+            {
+                list.Remove(shape);
+            }
+            toBeRemoved = new List<TrajectoryA>();
+        }
+
+        private void WallBounce(TrajectoryA shape, Point collision)
+        {
+            Graphics g = this.CreateGraphics();
+            
+
         }
 
         private void Form1A_MouseDown(object sender, MouseEventArgs e)
@@ -67,7 +106,6 @@ namespace SlingshotAnimation
         {
             Graphics g = this.CreateGraphics();
             Point up = new Point(e.X, e.Y);
-            g.DrawEllipse(new Pen(Brushes.White), new Rectangle(down.X, down.Y, 5, 5));
 
             if (down.X - up.X > down.X)
             {
@@ -83,5 +121,10 @@ namespace SlingshotAnimation
             }
         }
 
+        private void Form1A_ClientSizeChanged(object sender, EventArgs e)
+        {
+            windowWidth = this.Width;
+            windowHeight = this.Height;
+        }
     }
 }
