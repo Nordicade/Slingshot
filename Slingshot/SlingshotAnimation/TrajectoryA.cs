@@ -42,9 +42,7 @@ namespace SlingshotAnimation
 
             finalX = down.X + (int)(deltaX * deltaTime); //+ (int)(.5 * (acceleration * (time * time)));
             finalY = down.Y + (int)(deltaY * deltaTime) + (int)(.5 * (acceleration * (deltaTime * deltaTime)));
-            //finalX = down.X + (int)(initialV * deltaTime); //+ (int)(.5 * (acceleration * (time * time)));
-            //finalY = down.Y + (int) (initialV * deltaTime) + (int)(.5 * (acceleration * (deltaTime * deltaTime)));
-
+           
             return new Point(finalX, finalY);
         }
 
@@ -73,8 +71,7 @@ namespace SlingshotAnimation
 
             finalX = down.X + (int)(deltaX * deltaTime); //+ (int)(.5 * (acceleration * (time * time)));
             finalY = down.Y + (int)(deltaY * deltaTime) + (int)(.5 * (acceleration * (deltaTime * deltaTime)));
-            //finalX = down.X + (int)(initialV * deltaTime); //+ (int)(.5 * (acceleration * (time * time)));
-            //finalY = down.Y + (int) (initialV * deltaTime) + (int)(.5 * (acceleration * (deltaTime * deltaTime)));
+           
 
             return new Point(-finalX, finalY);
         }
@@ -88,12 +85,15 @@ namespace SlingshotAnimation
             int deltaY = up.Y - down.Y;
             int deltaX = up.X - down.X;
 
-            finalX = down.X - (int)(deltaX * deltaTime); //+ (int)(.5 * (acceleration * (time * time)));
-            finalY = down.Y + (int)(deltaY * deltaTime) + (int)(.5 * (acceleration * (deltaTime * deltaTime)));
-            //finalX = down.X + (int)(initialV * deltaTime); //+ (int)(.5 * (acceleration * (time * time)));
-            //finalY = down.Y + (int) (initialV * deltaTime) + (int)(.5 * (acceleration * (deltaTime * deltaTime)));
+            //closest so far
+            //finalX = down.X - (int)(deltaX * deltaTime); //+ (int)(.5 * (acceleration * (time * time)));
+            //finalY = down.Y + (int)(deltaY * deltaTime) + (int)(.5 * (acceleration * (deltaTime * deltaTime)));
+            //return new Point(finalX + up.X, finalY);
 
-            return new Point(finalX + deltaX, finalY);
+            finalX = - (int)(deltaX * deltaTime); //+ (int)(.5 * (acceleration * (time * time)));
+            finalY = down.Y + (int)(deltaY * deltaTime) + (int)(.5 * (acceleration * (deltaTime * deltaTime)));            
+            
+            return new Point(finalX, finalY);
         }
     }
 }

@@ -67,8 +67,8 @@ namespace SlingshotAnimation
                         else
                         {
                             Point bouncePt = shape.FindRBouncePos(tickCount);
-                            g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X, bouncePt.Y, 5, 5));
-                        }                
+                            g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X + windowWidth, bouncePt.Y, 5, 5));
+                        }
                     }
                     if (end.Y >= windowHeight)
                     {
