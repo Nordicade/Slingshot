@@ -59,26 +59,24 @@ namespace SlingshotAnimation
                     
                     if(end.X >= windowWidth || end.X <= 0)
                     {
-                        if (end.X <= 0)
+                        if (end.X <= 0 )
                         {
                             ////the code below does the job, but isn't adaptive
                             //g.DrawString("Left" + end.Y, DefaultFont, Brushes.Black, new Point(5, 5));
                             //Point bouncePt = shape.FindLBouncePos(tickCount);
                             //g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X, bouncePt.Y, 5, 5));
-
-                            Point bouncePt = shape.FindFinalPos(tickCount);
-                            g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(-bouncePt.X, bouncePt.Y, 5, 5));
+                            
+                            g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(-end.X, end.Y, 5, 5));
                         }
-                        else
+                        if(end.X >= windowWidth || end.X <= -windowWidth)
                         {
                             ////the code below does the job, but isn't adaptive
-                            //g.DrawString("Right" + end.Y, DefaultFont, Brushes.Black, new Point(50, 5));
-                            //Point bouncePt = shape.FindRBouncePos(tickCount);
-                            //// g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X + windowWidth, bouncePt.Y, 5, 5));
-                            //g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X +((windowWidth - 5)- down.X)+ (windowWidth - 5), bouncePt.Y, 5, 5));
-
-                            Point bouncePt = shape.FindFinalPos(tickCount);
+                            Point bouncePt = shape.FindRBouncePos(tickCount);
+                            // g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X + windowWidth, bouncePt.Y, 5, 5));
                             g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X + ((windowWidth - 5) - down.X) + (windowWidth - 5), bouncePt.Y, 5, 5));
+
+                           // Point bouncePt = shape.FindFinalPos(tickCount);
+                           // g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X + ((windowWidth - 5) - down.X) + (windowWidth - 5), bouncePt.Y, 5, 5));
                         }
                     }
                     if (end.Y >= windowHeight)
