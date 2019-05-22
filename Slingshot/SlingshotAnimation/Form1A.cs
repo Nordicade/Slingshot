@@ -56,14 +56,23 @@ namespace SlingshotAnimation
                 //check if end.X or end.Y is out of frame
                 if (end.X >= windowWidth || end.Y >= windowHeight || end.X <= 0)
                 {
-                    toBeRemoved.Add(shape);
+                    
                     if(end.X >= windowWidth || end.X <= 0)
                     {
-                        WallBounce(shape, new Point(end.X, end.Y));
+                        if (end.X <= 0)
+                        {
+                            Point bouncePt = shape.FindLBouncePos(tickCount);
+                            g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X, bouncePt.Y, 5, 5));
+                        }
+                        else
+                        {
+                            Point bouncePt = shape.FindRBouncePos(tickCount);
+                            g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X, bouncePt.Y, 5, 5));
+                        }                
                     }
-                    if(end.Y >= windowHeight)
+                    if (end.Y >= windowHeight)
                     {
-
+                        toBeRemoved.Add(shape);
                     }
                 }
                 else
@@ -87,12 +96,7 @@ namespace SlingshotAnimation
             toBeRemoved = new List<TrajectoryA>();
         }
 
-        private void WallBounce(TrajectoryA shape, Point collision)
-        {
-            Graphics g = this.CreateGraphics();
-            
-
-        }
+       
 
         private void Form1A_MouseDown(object sender, MouseEventArgs e)
         {
