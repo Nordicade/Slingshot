@@ -92,7 +92,8 @@ namespace SlingshotAnimation
 
             finalX = - (int)(deltaX * deltaTime); //+ (int)(.5 * (acceleration * (time * time)));
             finalY = down.Y + (int)(deltaY * deltaTime) + (int)(.5 * (acceleration * (deltaTime * deltaTime)));            
-            
+            //if finalX + deltaX { then the trajectory resumes at up.X
+            //if finalX { then the trajectory resumes at down.X
             return new Point(finalX, finalY);
         }
     }

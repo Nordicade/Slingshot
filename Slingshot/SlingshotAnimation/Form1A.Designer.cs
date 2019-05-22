@@ -36,7 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1172, 767);
             this.Name = "Form1A";
-            this.Text = "Form1";
+            this.Text = "SlingShot Animation";
             this.ClientSizeChanged += new System.EventHandler(this.Form1A_ClientSizeChanged);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1A_MouseDown);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1A_MouseUp);

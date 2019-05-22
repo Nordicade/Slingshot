@@ -61,13 +61,17 @@ namespace SlingshotAnimation
                     {
                         if (end.X <= 0)
                         {
+                            g.DrawString("Left" + end.Y, DefaultFont, Brushes.Black, new Point(5, 5));
                             Point bouncePt = shape.FindLBouncePos(tickCount);
                             g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X, bouncePt.Y, 5, 5));
                         }
                         else
                         {
+                            g.DrawString("Right" + end.Y, DefaultFont, Brushes.Black, new Point(50, 5));
                             Point bouncePt = shape.FindRBouncePos(tickCount);
-                            g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X + windowWidth, bouncePt.Y, 5, 5));
+                            // g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X + windowWidth, bouncePt.Y, 5, 5));
+                            g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X +((windowWidth - 5)- down.X)+ (windowWidth - 5), bouncePt.Y, 5, 5));
+
                         }
                     }
                     if (end.Y >= windowHeight)
