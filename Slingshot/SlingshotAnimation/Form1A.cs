@@ -48,35 +48,38 @@ namespace SlingshotAnimation
 
            Graphics g = this.CreateGraphics();
            foreach(TrajectoryA shape in list)
-           {                
-                //update redraw the current shape in white pen
-                Point end = shape.FindFinalPos(tickCount);
+           {
+                Point end = shape.FindFinalPos(--tickCount);
                 // g.DrawEllipse(new Pen(Brushes.White), new Rectangle(shape.down.X, shape.down.Y, 5, 5));
 
                 //check if end.X or end.Y is out of frame
                 if (end.X >= windowWidth || end.Y >= windowHeight || end.X <= 0)
-                {
-                    
+                {                   
                     if(end.X >= windowWidth || end.X <= 0)
                     {
+                        //handle left bounce
                         if (end.X <= 0 )
                         {
-                            ////the code below does the job, but isn't adaptive
-                            //g.DrawString("Left" + end.Y, DefaultFont, Brushes.Black, new Point(5, 5));
-                            //Point bouncePt = shape.FindLBouncePos(tickCount);
-                            //g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X, bouncePt.Y, 5, 5));
-                            
-                            g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(-end.X, end.Y, 5, 5));
+                            if (end.X / windowWidth % 2 == 0)
+                            {
+                                g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(-(end.X % windowWidth), end.Y, 5, 5));
+                            }
+                            else
+                            {
+                                g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(windowWidth+(end.X % windowWidth), end.Y, 5, 5));
+                            }
                         }
-                        if(end.X >= windowWidth || end.X <= -windowWidth)
-                        {
-                            ////the code below does the job, but isn't adaptive
-                            Point bouncePt = shape.FindRBouncePos(tickCount);
-                            // g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X + windowWidth, bouncePt.Y, 5, 5));
-                            g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X + ((windowWidth - 5) - down.X) + (windowWidth - 5), bouncePt.Y, 5, 5));
-
-                           // Point bouncePt = shape.FindFinalPos(tickCount);
-                           // g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(bouncePt.X + ((windowWidth - 5) - down.X) + (windowWidth - 5), bouncePt.Y, 5, 5));
+                        //handle right bounce
+                        if(end.X >= windowWidth)
+                        {                           
+                            if (end.X / windowWidth % 2 == 0)
+                            {
+                                g.DrawEllipse(new Pen(Brushes.Black), new Rectangle((end.X % windowWidth), end.Y, 5, 5));
+                            }
+                            else
+                            {
+                                g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(windowWidth - (end.X % windowWidth), end.Y, 5, 5));
+                            }
                         }
                     }
                     if (end.Y >= windowHeight)
@@ -92,7 +95,7 @@ namespace SlingshotAnimation
                         g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(end.X, end.Y, 5, 5));
                         //g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(shape.down.X, shape.down.Y, 5, 5));
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
                         g.DrawString("x=" + end.X + "y=" + end.Y, DefaultFont, Brushes.Black, new Point(5,5));
                     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SlingshotAnimation
 {
 
-    class TrajectoryA
+    public class TrajectoryA
     {
         public Point down;
         public Point up;
@@ -46,7 +46,7 @@ namespace SlingshotAnimation
             return new Point(finalX, finalY);
         }
 
-        private double FindSlope(Point down, Point up)
+        public double FindSlope(Point down, Point up)
         {
             double deltaY = (up.Y - down.Y);
             double deltaX = -(up.X - down.X);

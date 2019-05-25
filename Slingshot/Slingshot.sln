@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slingshot", "Slingshot\Slin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlingshotAnimation", "SlingshotAnimation\SlingshotAnimation.csproj", "{D32D7B0F-E899-4DF3-906F-2B0B37B5A581}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlingshotAnimationTests", "SlingshotAnimationTests\SlingshotAnimationTests.csproj", "{96092026-969C-4802-83DA-0F2CF2EAB8B3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D32D7B0F-E899-4DF3-906F-2B0B37B5A581} = {D32D7B0F-E899-4DF3-906F-2B0B37B5A581}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +26,10 @@ Global
 		{D32D7B0F-E899-4DF3-906F-2B0B37B5A581}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D32D7B0F-E899-4DF3-906F-2B0B37B5A581}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D32D7B0F-E899-4DF3-906F-2B0B37B5A581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96092026-969C-4802-83DA-0F2CF2EAB8B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96092026-969C-4802-83DA-0F2CF2EAB8B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96092026-969C-4802-83DA-0F2CF2EAB8B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96092026-969C-4802-83DA-0F2CF2EAB8B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
