@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WaveSim;
 
 namespace PhysicsApp
 {
@@ -30,6 +31,11 @@ namespace PhysicsApp
         private void slingshotToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showForm(SlingshotAnimation.Form1A.Instance);  
+        }
+
+        private void waveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showForm(Wave.Instance);
         }
     }
 }

@@ -166,7 +166,6 @@ namespace SlingshotAnimation
         {
             _instance = null;
             this.Dispose();
-
         }
     }
 }

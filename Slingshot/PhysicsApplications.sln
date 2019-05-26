@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlingshotAnimationTests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysicsApp", "PhysicsApp\PhysicsApp.csproj", "{9374264D-A37A-462F-A049-55640D12C761}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveSim", "WaveSim\WaveSim.csproj", "{840D5394-1F94-414A-83AA-22455A42D651}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{9374264D-A37A-462F-A049-55640D12C761}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9374264D-A37A-462F-A049-55640D12C761}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9374264D-A37A-462F-A049-55640D12C761}.Release|Any CPU.Build.0 = Release|Any CPU
+		{840D5394-1F94-414A-83AA-22455A42D651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{840D5394-1F94-414A-83AA-22455A42D651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{840D5394-1F94-414A-83AA-22455A42D651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{840D5394-1F94-414A-83AA-22455A42D651}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

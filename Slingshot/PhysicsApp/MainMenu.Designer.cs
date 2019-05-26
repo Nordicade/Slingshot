@@ -52,8 +52,8 @@
             this.slingshotToolStripMenuItem,
             this.waveToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 29);
-            this.toolStripMenuItem1.Text = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(128, 29);
+            this.toolStripMenuItem1.Text = "Physics Apps";
             // 
             // slingshotToolStripMenuItem
             // 
@@ -67,6 +67,7 @@
             this.waveToolStripMenuItem.Name = "waveToolStripMenuItem";
             this.waveToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.waveToolStripMenuItem.Text = "Wave";
+            this.waveToolStripMenuItem.Click += new System.EventHandler(this.waveToolStripMenuItem_Click);
             // 
             // MainMenu
             // 
