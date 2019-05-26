@@ -12,6 +12,8 @@ namespace SlingshotAnimation
 {
     public partial class Form1A : Form
     {
+        public static Form1A _instance;
+
         int tickCount;
 
         int windowWidth;
@@ -21,6 +23,21 @@ namespace SlingshotAnimation
 
         List<TrajectoryA> list;
         List<TrajectoryA> toBeRemoved;
+
+        public static Form1A Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new Form1A();
+                    return _instance;
+
+                }
+                return _instance;
+
+            }
+        }
 
 
         public Form1A()
@@ -40,72 +57,74 @@ namespace SlingshotAnimation
             MouseDown += Form1A_MouseDown;
             MouseUp += Form1A_MouseUp;
         }
-
        
         private void T_Tick(object sender, EventArgs e)
         {
-            tickCount++;
-
-           Graphics g = this.CreateGraphics();
-           foreach(TrajectoryA shape in list)
-           {
-                Point end = shape.FindFinalPos(--tickCount);
-                // g.DrawEllipse(new Pen(Brushes.White), new Rectangle(shape.down.X, shape.down.Y, 5, 5));
-
-                //check if end.X or end.Y is out of frame
-                if (end.X >= windowWidth || end.Y >= windowHeight || end.X <= 0)
-                {                   
-                    if(end.X >= windowWidth || end.X <= 0)
-                    {
-                        //handle left bounce
-                        if (end.X <= 0 )
-                        {
-                            if (end.X / windowWidth % 2 == 0)
-                            {
-                                g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(-(end.X % windowWidth), end.Y, 5, 5));
-                            }
-                            else
-                            {
-                                g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(windowWidth+(end.X % windowWidth), end.Y, 5, 5));
-                            }
-                        }
-                        //handle right bounce
-                        if(end.X >= windowWidth)
-                        {                           
-                            if (end.X / windowWidth % 2 == 0)
-                            {
-                                g.DrawEllipse(new Pen(Brushes.Black), new Rectangle((end.X % windowWidth), end.Y, 5, 5));
-                            }
-                            else
-                            {
-                                g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(windowWidth - (end.X % windowWidth), end.Y, 5, 5));
-                            }
-                        }
-                    }
-                    if (end.Y >= windowHeight)
-                    {
-                        toBeRemoved.Add(shape);
-                    }
-                }
-                else
-                {
-                    try
-                    {
-                        //increment t and redraw in black pen
-                        g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(end.X, end.Y, 5, 5));
-                        //g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(shape.down.X, shape.down.Y, 5, 5));
-                    }
-                    catch (Exception)
-                    {
-                        g.DrawString("x=" + end.X + "y=" + end.Y, DefaultFont, Brushes.Black, new Point(5,5));
-                    }
-                }
-            }
-           foreach(TrajectoryA shape in toBeRemoved)
+            if (!IsDisposed)
             {
-                list.Remove(shape);
+                tickCount++;
+
+                Graphics g = this.CreateGraphics();
+                foreach (TrajectoryA shape in list)
+                {
+                    Point end = shape.FindFinalPos(--tickCount);
+                    // g.DrawEllipse(new Pen(Brushes.White), new Rectangle(shape.down.X, shape.down.Y, 5, 5));
+
+                    //check if end.X or end.Y is out of frame
+                    if (end.X >= windowWidth || end.Y >= windowHeight || end.X <= 0)
+                    {
+                        if (end.X >= windowWidth || end.X <= 0)
+                        {
+                            //handle left bounce
+                            if (end.X <= 0)
+                            {
+                                if (end.X / windowWidth % 2 == 0)
+                                {
+                                    g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(-(end.X % windowWidth), end.Y, 5, 5));
+                                }
+                                else
+                                {
+                                    g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(windowWidth + (end.X % windowWidth), end.Y, 5, 5));
+                                }
+                            }
+                            //handle right bounce
+                            if (end.X >= windowWidth)
+                            {
+                                if (end.X / windowWidth % 2 == 0)
+                                {
+                                    g.DrawEllipse(new Pen(Brushes.Black), new Rectangle((end.X % windowWidth), end.Y, 5, 5));
+                                }
+                                else
+                                {
+                                    g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(windowWidth - (end.X % windowWidth), end.Y, 5, 5));
+                                }
+                            }
+                        }
+                        if (end.Y >= windowHeight)
+                        {
+                            toBeRemoved.Add(shape);
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            //increment t and redraw in black pen
+                            g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(end.X, end.Y, 5, 5));
+                            //g.DrawEllipse(new Pen(Brushes.Black), new Rectangle(shape.down.X, shape.down.Y, 5, 5));
+                        }
+                        catch (Exception)
+                        {
+                            g.DrawString("x=" + end.X + "y=" + end.Y, DefaultFont, Brushes.Black, new Point(5, 5));
+                        }
+                    }
+                }
+                foreach (TrajectoryA shape in toBeRemoved)
+                {
+                    list.Remove(shape);
+                }
+                toBeRemoved = new List<TrajectoryA>();
             }
-            toBeRemoved = new List<TrajectoryA>();
         }
 
        
@@ -141,6 +160,13 @@ namespace SlingshotAnimation
         {
             windowWidth = this.Width;
             windowHeight = this.Height;
+        }
+
+        private void Form1A_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _instance = null;
+            this.Dispose();
+
         }
     }
 }
