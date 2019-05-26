@@ -17,27 +17,7 @@ namespace WaveSim
         public Wave()
         {
             InitializeComponent();
-            DrawWaveBoxLeft();
-            DrawWaveBoxRight();
-            DrawWaveBoxMid();
-        }
-
-        private void DrawWaveBoxMid()
-        {
-            Graphics g = this.CreateGraphics();
-            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(9, 50, 200, 100));
-        }
-
-        private void DrawWaveBoxRight()
-        {
-            Graphics g = this.CreateGraphics();
-            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(205, 105, 400, 500));
-        }
-
-        private void DrawWaveBoxLeft()
-        {
-            Graphics g = this.CreateGraphics();
-            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(9,50,200,100));
+            this.Size = new Size(840, 700);
         }
 
         public static Wave Instance
@@ -71,6 +51,14 @@ namespace WaveSim
         {
             int rightScrollValue = vScrollBar2.Value;
             textBox2.Text = rightScrollValue.ToString();
+        }
+
+        private void Wave_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = this.CreateGraphics();
+            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(40, 40, 360, 200));
+            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(410, 40, 360, 200));
+            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(0, 260, 9000, 400));
         }
     }
 }

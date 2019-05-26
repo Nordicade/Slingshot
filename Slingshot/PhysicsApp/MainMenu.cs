@@ -15,9 +15,9 @@ namespace PhysicsApp
     {
         public MainMenu()
         {
-            this.Height = 200;
-            this.Width = 200;
-            this.MinimumSize = new System.Drawing.Size(1250,1000);
+            // this.Size = new Size(900, 1100);
+            this.Location = new Point(5,5);
+            this.MinimumSize = new System.Drawing.Size(1250,1200);
             InitializeComponent();
         }
 

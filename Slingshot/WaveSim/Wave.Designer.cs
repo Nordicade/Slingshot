@@ -37,21 +37,22 @@
             // 
             // vScrollBar1
             // 
-            this.vScrollBar1.Location = new System.Drawing.Point(9, 50);
+            this.vScrollBar1.Location = new System.Drawing.Point(9, 70);
+            this.vScrollBar1.Maximum = 109;
             this.vScrollBar1.Minimum = -100;
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(30, 200);
+            this.vScrollBar1.Size = new System.Drawing.Size(30, 250);
             this.vScrollBar1.TabIndex = 0;
-            this.vScrollBar1.Value = 100;
             this.vScrollBar1.ValueChanged += new System.EventHandler(this.vScrollBar1_ValueChanged);
             this.vScrollBar1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.vScrollBar1_KeyDown);
             // 
             // vScrollBar2
             // 
-            this.vScrollBar2.Location = new System.Drawing.Point(1171, 50);
+            this.vScrollBar2.Location = new System.Drawing.Point(1171, 70);
+            this.vScrollBar2.Maximum = 109;
             this.vScrollBar2.Minimum = -100;
             this.vScrollBar2.Name = "vScrollBar2";
-            this.vScrollBar2.Size = new System.Drawing.Size(30, 200);
+            this.vScrollBar2.Size = new System.Drawing.Size(30, 250);
             this.vScrollBar2.TabIndex = 1;
             this.vScrollBar2.ValueChanged += new System.EventHandler(this.vScrollBar2_ValueChanged);
             // 
@@ -59,7 +60,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(215, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(730, 35);
+            this.button1.Size = new System.Drawing.Size(780, 35);
             this.button1.TabIndex = 2;
             this.button1.Text = "Merge";
             this.button1.UseVisualStyleBackColor = true;
@@ -77,9 +78,9 @@
             // textBox2
             // 
             this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(951, 16);
+            this.textBox2.Location = new System.Drawing.Point(1001, 16);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(243, 26);
+            this.textBox2.Size = new System.Drawing.Size(200, 26);
             this.textBox2.TabIndex = 4;
             this.textBox2.Text = "0";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -96,6 +97,7 @@
             this.Controls.Add(this.vScrollBar1);
             this.Name = "Wave";
             this.Text = "Wave";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Wave_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();
 
