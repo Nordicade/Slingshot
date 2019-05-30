@@ -18,6 +18,50 @@ namespace WaveSim
         {
             InitializeComponent();
             this.Size = new Size(840, 700);
+            Timer t = new Timer();
+            t.Start();
+            t.Tick += T_Tick;
+            
+        }
+
+        private void T_Tick(object sender, EventArgs e)
+        {
+            Graphics g = this.CreateGraphics();
+
+            //left square wave
+
+            int length = 360;
+            PointF[] leftPList = new PointF[length];
+            for (int i = 0; i < length; i++)
+            {
+                //double amplitude = 10;
+                //double constant = 1000;
+                //double frequency = 1;
+
+                double amplitude = 10;
+                double constant = 1000;
+                double frequency = 1;
+                double y = amplitude * Math.Sin(constant * i - (frequency * i));
+                leftPList[i] = new PointF(40 + i, 140 + (float)y);
+            }
+            g.DrawLines(new Pen(Brushes.Black), leftPList);
+
+            //left square wave
+
+            PointF[] rightPList = new PointF[length];
+            for (int i = 0; i < length; i++)
+            {
+                //double amplitude = 10;
+                //double constant = 1000;
+                //double frequency = 1;
+
+                double amplitude = 10;
+                double constant = 1000;
+                double frequency = 1;
+                double y = amplitude * Math.Sin(constant * i - (frequency * i));
+                rightPList[i] = new PointF(410 + i, 140 + (float)y);
+            }
+            g.DrawLines(new Pen(Brushes.Black), rightPList);
         }
 
         public static Wave Instance
@@ -37,8 +81,8 @@ namespace WaveSim
 
         private void vScrollBar1_KeyDown(object sender, KeyEventArgs e)
         {
-            int leftScrollValue = vScrollBar1.Value;
-            textBox1.Text = leftScrollValue.ToString();
+            Graphics g = this.CreateGraphics();
+            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(30, 30, 360, 200));
         }
 
         private void vScrollBar1_ValueChanged(object sender, EventArgs e)
@@ -56,9 +100,26 @@ namespace WaveSim
         private void Wave_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = this.CreateGraphics();
+            //draw 3 wave windows
             g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(40, 40, 360, 200));
             g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(410, 40, 360, 200));
-            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(0, 260, 9000, 400));
+            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(0, 260, 820, 400));
+
+            //draw x axis for all 3 windows
+
+           
+
         }
+        private void vScrollBar1_Enter(object sender, EventArgs e)
+        {
+           
+        }     
+
+        private void vScrollBar1_MouseHover(object sender, EventArgs e)
+        {
+        }
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {          
+        }        
     }
 }

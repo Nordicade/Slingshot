@@ -43,8 +43,11 @@
             this.vScrollBar1.Name = "vScrollBar1";
             this.vScrollBar1.Size = new System.Drawing.Size(30, 250);
             this.vScrollBar1.TabIndex = 0;
+            this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             this.vScrollBar1.ValueChanged += new System.EventHandler(this.vScrollBar1_ValueChanged);
+            this.vScrollBar1.Enter += new System.EventHandler(this.vScrollBar1_Enter);
             this.vScrollBar1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.vScrollBar1_KeyDown);
+            this.vScrollBar1.MouseHover += new System.EventHandler(this.vScrollBar1_MouseHover);
             // 
             // vScrollBar2
             // 

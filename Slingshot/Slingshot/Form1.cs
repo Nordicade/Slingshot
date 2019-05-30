@@ -88,9 +88,30 @@ namespace Slingshot
                 initY = e.Y;
                 g.DrawEllipse(new Pen(Brushes.Black), initX-5, initY-5, 10, 10);
             }
+            if (status == "Wave")
+            {
+                Graphics g = this.CreateGraphics();
+                int length = this.Width - e.X;
+                PointF[] pList = new PointF[length];
+                for(int i = 0; i < length; i++)
+                {
+                    //double amplitude = 10;
+                    //double constant = 1000;
+                    //double frequency = 1;
+
+                    double amplitude = 10;
+                    double constant = 1000;
+                    double frequency = 1;
+                    double y = amplitude * Math.Sin(constant * i - (frequency * i));
+                    pList[i] = new PointF(i + e.X , e.Y + (float) y);
+                }
+                g.DrawLines(new Pen(Brushes.Black), pList);
+                g.DrawLine(new Pen(Brushes.Black), new PointF(e.X, e.Y), new PointF(length, e.Y));
+                
+            }
             else
             {
-                
+
 
             }
         }
@@ -191,6 +212,10 @@ namespace Slingshot
         {
             status = "Arrow";
         }
+        private void radioButton4_Click(object sender, EventArgs e)
+        {
+            status = "Wave";
+        }
         private void Form1_Button1_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
@@ -248,6 +273,9 @@ namespace Slingshot
 
         }
 
-      
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

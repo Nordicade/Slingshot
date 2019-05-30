@@ -66,7 +66,7 @@
             // 
             this.waveToolStripMenuItem.Name = "waveToolStripMenuItem";
             this.waveToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
-            this.waveToolStripMenuItem.Text = "Wave";
+            this.waveToolStripMenuItem.Text = "Wave Merge";
             this.waveToolStripMenuItem.Click += new System.EventHandler(this.waveToolStripMenuItem_Click);
             // 
             // MainMenu
