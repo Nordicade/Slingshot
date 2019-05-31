@@ -15,6 +15,8 @@ namespace WaveSim
         public static Wave _instance;
         PointF[] toBeRemovedL;
         PointF[] toBeRemovedR;
+        Boolean hasChanged;
+
 
         public Wave()
         {
@@ -27,62 +29,58 @@ namespace WaveSim
             t.Start();
             t.Interval = 100;
             t.Tick += T_Tick;
-            
+            hasChanged = true;
         }
 
         private void T_Tick(object sender, EventArgs e)
         {
             Graphics g = this.CreateGraphics();
-            EraseOldWave();
-
-            //draw 3 wave windows
-            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(40, 40, 360, 200));
-            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(410, 40, 360, 200));
-            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(0, 260, 820, 400));
-            //left square wave
-
-            int length = 360;
-            PointF[] leftPList = new PointF[length];
-            for (int i = 0; i < length; i++)
+            if (hasChanged)
             {
-                //double amplitude = 10;
-                //double constant = 1000;
-                //double frequency = 1;
+                EraseOldWave();
 
-                double amplitude = 55; //range from 1 to 50
-                double constant = .015;  //range from .015 to 1
-                double frequency = 1;
-                double slider = 2;
-                //double y = amplitude * Math.Sin(constant * i - (frequency * i));
-                double y = amplitude * Math.Sin(constant * i + slider);
-                leftPList[i] = new PointF(40 + i, 140 + (float)y);
-                for(int index = 0; index < length; index++)
+                //left square wave
+
+                int length = 360;
+                PointF[] leftPList = new PointF[length];
+                for (int i = 0; i < length; i++)
                 {
-                    toBeRemovedL[index] = leftPList[index];
+                    //double amplitude = 10;
+                    //double constant = 1000;
+                    //double frequency = 1;
+
+                    double amplitude = vScrollBar1.Value; //range from 1 to 50
+                    double constant = 1;
+                    double scrollValue = (double) vScrollBar3.Value;
+                    double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1
+                    double y = amplitude * Math.Sin(constant * i - (frequency * i));
+                    leftPList[i] = new PointF(40 + i, 140 + (float)y);
+                    for (int index = 0; index < length; index++)
+                    {
+                        toBeRemovedL[index] = leftPList[index];
+                    }
                 }
-            }
-            g.DrawLines(new Pen(Brushes.Black), leftPList);
+                g.DrawLines(new Pen(Brushes.Black), leftPList);
 
-            //left square wave
+                //right square wave
 
-            PointF[] rightPList = new PointF[length];
-            for (int i = 0; i < length; i++)
-            {
-                //double amplitude = 10;
-                //double constant = 1000;
-                //double frequency = 1;
-
-                double amplitude = 10;
-                double constant = 1000;
-                double frequency = 1;
-                double y = amplitude * Math.Sin(constant * i - (frequency * i));
-                rightPList[i] = new PointF(410 + i, 140 + (float)y);
-                for (int index = 0; index < length; index++)
+                PointF[] rightPList = new PointF[length];
+                for (int i = 0; i < length; i++)
                 {
-                    toBeRemovedR[index] = rightPList[index];
+                    double amplitude = vScrollBar2.Value;  //range from 1 to 50
+                    double constant = 1;
+                    double scrollValue = (double)vScrollBar4.Value;
+                    double frequency = scrollValue * Math.Pow(10, -3);  //range from .015 to 1
+                    double y = amplitude * Math.Sin(constant * i - (frequency * i));
+                    rightPList[i] = new PointF(410 + i, 140 + (float)y);
+                    for (int index = 0; index < length; index++)
+                    {
+                        toBeRemovedR[index] = rightPList[index];
+                    }
                 }
+                g.DrawLines(new Pen(Brushes.Black), rightPList);
+                hasChanged = false;
             }
-            g.DrawLines(new Pen(Brushes.Black), rightPList);
         }
 
         private void EraseOldWave()
@@ -123,16 +121,33 @@ namespace WaveSim
             g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(30, 30, 360, 200));
         }
 
+        //handles vscrollbar value change for topleft (textbox1)
         private void vScrollBar1_ValueChanged(object sender, EventArgs e)
         {
-            int leftScrollValue = vScrollBar1.Value;
-            textBox1.Text = leftScrollValue.ToString();
+            int left1ScrollValue = vScrollBar1.Value;
+            textBox1.Text = "Amplitude:" + left1ScrollValue.ToString();
+            hasChanged = true;
         }
-
+        //handles vscrollbar value change for topright (textbox4)
         private void vScrollBar2_ValueChanged(object sender, EventArgs e)
         {
-            int rightScrollValue = vScrollBar2.Value;
-            textBox2.Text = rightScrollValue.ToString();
+            int right1ScrollValue = vScrollBar2.Value;
+            textBox4.Text = "Amplitude:" + right1ScrollValue.ToString();
+            hasChanged = true;
+        }
+        //handles vscrollbar value change for Botright (textbox2)
+        private void vScrollBar4_ValueChanged(object sender, EventArgs e)
+        {
+              int left2ScrollValue = vScrollBar4.Value;
+              textBox2.Text = "Frequency:"+ left2ScrollValue.ToString();
+              hasChanged = true;
+        }
+        //handles vscrollbar value change for topleft
+        private void vScrollBar3_ValueChanged(object sender, EventArgs e)
+        {
+            int right2ScrollValue = vScrollBar3.Value;
+            textBox3.Text = "Frequency:" + right2ScrollValue.ToString();
+            hasChanged = true;
         }
 
         private void Wave_Paint(object sender, PaintEventArgs e)
@@ -158,6 +173,11 @@ namespace WaveSim
         }
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {          
-        }        
+        }
+
+        private void vScrollBar3_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
     }
 }
