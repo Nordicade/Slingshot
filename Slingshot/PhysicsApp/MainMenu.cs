@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tessellate;
 using WaveSim;
 
 namespace PhysicsApp
@@ -36,6 +37,11 @@ namespace PhysicsApp
         private void waveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showForm(Wave.Instance);
+        }
+
+        private void tessellateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showForm(Canvas.Instance);
         }
     }
 }

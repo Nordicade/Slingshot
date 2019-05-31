@@ -50,11 +50,7 @@ namespace WaveSim
                     //double constant = 1000;
                     //double frequency = 1;
 
-                    double amplitude = vScrollBar1.Value; //range from 1 to 50
-                    if(amplitude > 50 || amplitude < 1)
-                    {
-                        throw new Exception();
-                    }
+                    double amplitude = vScrollBar1.Value; //range from 1 to 50               
                     double constant = 1;
                     double scrollValue = (double) vScrollBar3.Value;              
                    // double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1                   

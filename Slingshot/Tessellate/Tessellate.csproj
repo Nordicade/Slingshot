@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9374264D-A37A-462F-A049-55640D12C761}</ProjectGuid>
+    <ProjectGuid>{46C39448-882A-46D0-A07B-9A28403A0689}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>PhysicsApp</RootNamespace>
-    <AssemblyName>PhysicsApp</AssemblyName>
+    <RootNamespace>Tessellate</RootNamespace>
+    <AssemblyName>Tessellate</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,16 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainMenu.cs">
+    <Compile Include="Canvas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainMenu.Designer.cs">
-      <DependentUpon>MainMenu.cs</DependentUpon>
+    <Compile Include="Canvas.Designer.cs">
+      <DependentUpon>Canvas.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainMenu.resx">
-      <DependentUpon>MainMenu.cs</DependentUpon>
+    <Compile Include="Triangle.cs" />
+    <EmbeddedResource Include="Canvas.resx">
+      <DependentUpon>Canvas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -78,24 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SlingshotAnimation\SlingshotAnimation.csproj">
-      <Project>{d32d7b0f-e899-4df3-906f-2b0b37b5a581}</Project>
-      <Name>SlingshotAnimation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Slingshot\Slingshot.csproj">
-      <Project>{fe31631e-4ec0-429d-a204-f4807c7d52be}</Project>
-      <Name>Slingshot</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tessellate\Tessellate.csproj">
-      <Project>{46c39448-882a-46d0-a07b-9a28403a0689}</Project>
-      <Name>Tessellate</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WaveSim\WaveSim.csproj">
-      <Project>{840d5394-1f94-414a-83aa-22455a42d651}</Project>
-      <Name>WaveSim</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

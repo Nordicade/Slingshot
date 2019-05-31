@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slingshot", "Slingshot\Slin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlingshotAnimation", "SlingshotAnimation\SlingshotAnimation.csproj", "{D32D7B0F-E899-4DF3-906F-2B0B37B5A581}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlingshotAnimationTests", "SlingshotAnimationTests\SlingshotAnimationTests.csproj", "{96092026-969C-4802-83DA-0F2CF2EAB8B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SlingshotAnimationTests", "SlingshotAnimationTests\SlingshotAnimationTests.csproj", "{96092026-969C-4802-83DA-0F2CF2EAB8B3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D32D7B0F-E899-4DF3-906F-2B0B37B5A581} = {D32D7B0F-E899-4DF3-906F-2B0B37B5A581}
 	EndProjectSection
@@ -15,6 +15,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysicsApp", "PhysicsApp\PhysicsApp.csproj", "{9374264D-A37A-462F-A049-55640D12C761}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveSim", "WaveSim\WaveSim.csproj", "{840D5394-1F94-414A-83AA-22455A42D651}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tessellate", "Tessellate\Tessellate.csproj", "{46C39448-882A-46D0-A07B-9A28403A0689}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,10 @@ Global
 		{840D5394-1F94-414A-83AA-22455A42D651}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{840D5394-1F94-414A-83AA-22455A42D651}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{840D5394-1F94-414A-83AA-22455A42D651}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46C39448-882A-46D0-A07B-9A28403A0689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46C39448-882A-46D0-A07B-9A28403A0689}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46C39448-882A-46D0-A07B-9A28403A0689}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46C39448-882A-46D0-A07B-9A28403A0689}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

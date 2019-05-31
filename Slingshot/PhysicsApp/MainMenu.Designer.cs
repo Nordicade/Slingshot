@@ -32,6 +32,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.slingshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.waveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tessellateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +51,8 @@
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.slingshotToolStripMenuItem,
-            this.waveToolStripMenuItem});
+            this.waveToolStripMenuItem,
+            this.tessellateToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(128, 29);
             this.toolStripMenuItem1.Text = "Physics Apps";
@@ -68,6 +70,13 @@
             this.waveToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.waveToolStripMenuItem.Text = "Wave Merge";
             this.waveToolStripMenuItem.Click += new System.EventHandler(this.waveToolStripMenuItem_Click);
+            // 
+            // tessellateToolStripMenuItem
+            // 
+            this.tessellateToolStripMenuItem.Name = "tessellateToolStripMenuItem";
+            this.tessellateToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.tessellateToolStripMenuItem.Text = "Tessellate";
+            this.tessellateToolStripMenuItem.Click += new System.EventHandler(this.tessellateToolStripMenuItem_Click);
             // 
             // MainMenu
             // 
@@ -92,6 +101,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem slingshotToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem waveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tessellateToolStripMenuItem;
     }
 }
 
