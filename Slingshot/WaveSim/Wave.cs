@@ -13,13 +13,19 @@ namespace WaveSim
     public partial class Wave : Form
     {
         public static Wave _instance;
+        PointF[] toBeRemovedL;
+        PointF[] toBeRemovedR;
 
         public Wave()
         {
             InitializeComponent();
+            this.BackColor = Color.White;
             this.Size = new Size(840, 700);
+            toBeRemovedL = new PointF[360];
+            toBeRemovedR = new PointF[360];
             Timer t = new Timer();
             t.Start();
+            t.Interval = 100;
             t.Tick += T_Tick;
             
         }
@@ -27,7 +33,12 @@ namespace WaveSim
         private void T_Tick(object sender, EventArgs e)
         {
             Graphics g = this.CreateGraphics();
+            EraseOldWave();
 
+            //draw 3 wave windows
+            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(40, 40, 360, 200));
+            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(410, 40, 360, 200));
+            g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(0, 260, 820, 400));
             //left square wave
 
             int length = 360;
@@ -38,11 +49,17 @@ namespace WaveSim
                 //double constant = 1000;
                 //double frequency = 1;
 
-                double amplitude = 10;
-                double constant = 1000;
+                double amplitude = 55; //range from 1 to 50
+                double constant = .015;  //range from .015 to 1
                 double frequency = 1;
-                double y = amplitude * Math.Sin(constant * i - (frequency * i));
+                double slider = 2;
+                //double y = amplitude * Math.Sin(constant * i - (frequency * i));
+                double y = amplitude * Math.Sin(constant * i + slider);
                 leftPList[i] = new PointF(40 + i, 140 + (float)y);
+                for(int index = 0; index < length; index++)
+                {
+                    toBeRemovedL[index] = leftPList[index];
+                }
             }
             g.DrawLines(new Pen(Brushes.Black), leftPList);
 
@@ -60,8 +77,29 @@ namespace WaveSim
                 double frequency = 1;
                 double y = amplitude * Math.Sin(constant * i - (frequency * i));
                 rightPList[i] = new PointF(410 + i, 140 + (float)y);
+                for (int index = 0; index < length; index++)
+                {
+                    toBeRemovedR[index] = rightPList[index];
+                }
             }
             g.DrawLines(new Pen(Brushes.Black), rightPList);
+        }
+
+        private void EraseOldWave()
+        {
+            if (toBeRemovedL.Length != 0)
+            {
+                Graphics g = this.CreateGraphics();
+                g.DrawLines(new Pen(Brushes.White), toBeRemovedL);
+                toBeRemovedL = new PointF[360];
+            }
+            if (toBeRemovedR.Length != 0)
+            {
+                Graphics g = this.CreateGraphics();
+                g.DrawLines(new Pen(Brushes.White), toBeRemovedR);
+                toBeRemovedR = new PointF[360];
+            }
+
         }
 
         public static Wave Instance
