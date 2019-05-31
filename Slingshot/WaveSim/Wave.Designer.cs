@@ -121,7 +121,7 @@
             this.vScrollBar3.Name = "vScrollBar3";
             this.vScrollBar3.Size = new System.Drawing.Size(30, 148);
             this.vScrollBar3.TabIndex = 7;
-            this.vScrollBar3.Value = 55;
+            this.vScrollBar3.Value = 15;
             this.vScrollBar3.ValueChanged += new System.EventHandler(this.vScrollBar3_ValueChanged);
             // 
             // vScrollBar4

@@ -16,7 +16,7 @@ namespace WaveSim
         PointF[] toBeRemovedL;
         PointF[] toBeRemovedR;
         Boolean hasChanged;
-
+        int tickCount;
 
         public Wave()
         {
@@ -35,7 +35,8 @@ namespace WaveSim
         private void T_Tick(object sender, EventArgs e)
         {
             Graphics g = this.CreateGraphics();
-            if (hasChanged)
+            tickCount++;
+            if (hasChanged || tickCount != 0)
             {
                 EraseOldWave();
 
@@ -50,10 +51,16 @@ namespace WaveSim
                     //double frequency = 1;
 
                     double amplitude = vScrollBar1.Value; //range from 1 to 50
+                    if(amplitude > 50 || amplitude < 1)
+                    {
+                        throw new Exception();
+                    }
                     double constant = 1;
-                    double scrollValue = (double) vScrollBar3.Value;
-                    double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1
-                    double y = amplitude * Math.Sin(constant * i - (frequency * i));
+                    double scrollValue = (double) vScrollBar3.Value;              
+                   // double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1                   
+                    double frequency = scrollValue;
+                    // double y = amplitude * Math.Sin(constant * i - (frequency * i));
+                    double y = amplitude * Math.Sin(constant * i - (frequency * tickCount));
                     leftPList[i] = new PointF(40 + i, 140 + (float)y);
                     for (int index = 0; index < length; index++)
                     {
@@ -70,8 +77,8 @@ namespace WaveSim
                     double amplitude = vScrollBar2.Value;  //range from 1 to 50
                     double constant = 1;
                     double scrollValue = (double)vScrollBar4.Value;
-                    double frequency = scrollValue * Math.Pow(10, -3);  //range from .015 to 1
-                    double y = amplitude * Math.Sin(constant * i - (frequency * i));
+                    double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1
+                    double y = amplitude * Math.Sin(constant * i - (frequency * tickCount));
                     rightPList[i] = new PointF(410 + i, 140 + (float)y);
                     for (int index = 0; index < length; index++)
                     {

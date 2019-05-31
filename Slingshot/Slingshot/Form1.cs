@@ -104,11 +104,11 @@ namespace Slingshot
                     //double scrollValue = (double)vScrollBar4.Value;
                     //double frequency = scrollValue * Math.Pow(10, -3);  //range from .015 to 1
 
-                    double amplitude = 10;
-                    double constant = .6;
-                    double frequency = 1;
-                    //double y = amplitude * Math.Sin(constant * i - (frequency * i));
-                    double y = amplitude * Math.Sin(constant * i);
+                    double amplitude = 100;
+                    double constant = 1;
+                    double frequency = 5;
+                    double y = amplitude * Math.Sin((constant * i) - (frequency * i));
+                    //double y = amplitude * Math.Sin(constant * i);
                     pList[i] = new PointF(i + e.X , e.Y + (float) y);
                 }
                 g.DrawLines(new Pen(Brushes.Black), pList);
