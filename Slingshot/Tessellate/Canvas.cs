@@ -40,22 +40,88 @@ namespace Tessellate
             Triangle t2 = new Triangle(corner1, corner3, eccentricP);
             Triangle t3 = new Triangle(corner2, corner4, eccentricP);
             Triangle t4 = new Triangle(corner3, corner4, eccentricP);
-            ConnectPoints(t1);
-            ConnectPoints(t2);
-            ConnectPoints(t3);
-            ConnectPoints(t4);
-            
+            ConnectPoints(t1,g);
+            ConnectPoints(t2,g);
+            ConnectPoints(t3,g);
+            ConnectPoints(t4,g);
+            FindTriangleWithin(t1);
+            FindTriangleWithin(t2);
+            FindTriangleWithin(t3);
+            FindTriangleWithin(t4);
+            g.DrawString("size=" + tList.Count, this.Font,Brushes.Black, 30, 30);
+            foreach(Triangle element in tList)
+            {
+                ConnectPoints(element,g);
+            }
         }
 
-        public Triangle FindTriangleWithin(Triangle t)
+        public void FindTriangleWithin(Triangle t)
         {
-            
-            return new Triangle(new Point(2, 3), new Point(2, 3), new Point(3, 4));
+            if (t.area <=1500)
+            {
+                return;
+            }
+            else
+            {
+                Random rng = new Random();
+                Point between1and2;
+                Point between2and3;
+                Point between3and1;
+
+                //generate between1and2
+                if (t.p1.X != t.p2.X)
+                {
+                    
+                    double u = rng.NextDouble();
+                    double slope = (t.p2.Y - t.p1.Y) / (t.p2.X - t.p1.X);
+                    double midX = ((t.p2.X - t.p1.X) * u + t.p1.X);
+                    double midY =  (slope * (midX - t.p1.X)) + t.p1.Y; 
+                    between1and2 = new Point((int)midX,(int)midY);                   
+                }
+                else
+                {
+                    double u = rng.NextDouble();
+                    double midY = (((t.p2.Y - t.p1.Y)*u)+t.p1.Y);
+                    between1and2 = new Point(t.p1.X, (int)midY);
+                }
+                //generate between2and3
+                if (t.p2.X != t.p3.X)
+                {
+                    double u = rng.NextDouble();
+                    double slope = (t.p3.Y - t.p2.Y) / (t.p3.X - t.p2.X);
+                    double midX = ((t.p3.X - t.p2.X) * u + t.p2.X);
+                    double midY = (slope * (midX - t.p2.X)) + t.p2.Y;
+                    between2and3 = new Point((int)midX,(int) midY);
+                }
+                else
+                {
+                    double u = rng.NextDouble();
+                    double midY = ((t.p3.Y - t.p2.Y) * u )+ t.p2.Y;
+                    between2and3 = new Point(t.p2.X,(int) midY);
+                }
+                //generate between3and1
+                if (t.p3.X != t.p1.X)
+                {
+                    double u = rng.NextDouble();
+                    double slope = (t.p1.Y - t.p3.Y) / (t.p1.X - t.p3.X);
+                    double midX = ((t.p1.X - t.p3.X) * u + t.p3.X);
+                    double midY = (slope * (midX - t.p3.X)) + t.p3.Y;
+                    between3and1 = new Point((int)midX, (int)midY);
+                }
+                else
+                {
+                    double u = rng.NextDouble();
+                    double midY = ((t.p1.Y - t.p3.Y) * u )+ t.p3.Y;
+                    between3and1 = new Point(t.p3.X, (int)midY);
+                }
+                Triangle curr = new Triangle(between1and2, between2and3, between3and1);                
+                tList.Add(curr);
+                FindTriangleWithin(curr);
+            }
         }
 
-        public void ConnectPoints(Triangle t)
+        public void ConnectPoints(Triangle t, Graphics g)
         {
-            Graphics g = this.CreateGraphics();
             g.DrawLine(p, t.p1, t.p2);
             g.DrawLine(p, t.p2, t.p3);
             g.DrawLine(p, t.p3, t.p1);
@@ -77,7 +143,13 @@ namespace Tessellate
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = this.CreateGraphics();
-            StartingPoints(g);
+            StartingPoints(g);          
+        }
+
+        private void Canvas_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _instance = null;
+            this.Dispose();
         }
     }
   

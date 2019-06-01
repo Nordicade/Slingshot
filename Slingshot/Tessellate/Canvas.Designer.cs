@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(1102, 667);
             this.Name = "Canvas";
             this.Text = "Tessellate";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Canvas_FormClosed);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
             this.ResumeLayout(false);
 

@@ -24,7 +24,7 @@ namespace Tessellate
         
         public double FindArea()
         {
-            double result = (p1.X * (p2.Y - p3.Y) + p2.X * (p1.Y - p3.Y) + p3.X * (p1.Y - p2.Y)) / 2;
+            double result = ((p2.X - p1.X)*(p3.Y-p1.Y)-(p3.X-p1.X)*(p2.Y-p1.Y)) / 2;
             return Math.Abs(result); ;
         }
     }
