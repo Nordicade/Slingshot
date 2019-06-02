@@ -48,7 +48,6 @@ namespace Tessellate
             FindTriangleWithin(t2);
             FindTriangleWithin(t3);
             FindTriangleWithin(t4);
-            g.DrawString("size=" + tList.Count, this.Font,Brushes.Black, 30, 30);
             foreach(Triangle element in tList)
             {
                 ConnectPoints(element,g);
@@ -64,6 +63,7 @@ namespace Tessellate
             else
             {
                 Random rng = new Random();
+                double u = rng.NextDouble();
                 Point between1and2;
                 Point between2and3;
                 Point between3and1;
@@ -72,45 +72,44 @@ namespace Tessellate
                 if (t.p1.X != t.p2.X)
                 {
                     
-                    double u = rng.NextDouble();
-                    double slope = (t.p2.Y - t.p1.Y) / (t.p2.X - t.p1.X);
+                    double slope = (double)(t.p2.Y - t.p1.Y) / (t.p2.X - t.p1.X);
                     double midX = ((t.p2.X - t.p1.X) * u + t.p1.X);
                     double midY =  (slope * (midX - t.p1.X)) + t.p1.Y; 
                     between1and2 = new Point((int)midX,(int)midY);                   
                 }
                 else
                 {
-                    double u = rng.NextDouble();
+                    //double u = rng.NextDouble();
                     double midY = (((t.p2.Y - t.p1.Y)*u)+t.p1.Y);
                     between1and2 = new Point(t.p1.X, (int)midY);
                 }
                 //generate between2and3
                 if (t.p2.X != t.p3.X)
                 {
-                    double u = rng.NextDouble();
-                    double slope = (t.p3.Y - t.p2.Y) / (t.p3.X - t.p2.X);
+                   // double u = rng.NextDouble();
+                    double slope =(double) (t.p3.Y - t.p2.Y) / (t.p3.X - t.p2.X);
                     double midX = ((t.p3.X - t.p2.X) * u + t.p2.X);
                     double midY = (slope * (midX - t.p2.X)) + t.p2.Y;
                     between2and3 = new Point((int)midX,(int) midY);
                 }
                 else
                 {
-                    double u = rng.NextDouble();
+                    //double u = rng.NextDouble();
                     double midY = ((t.p3.Y - t.p2.Y) * u )+ t.p2.Y;
                     between2and3 = new Point(t.p2.X,(int) midY);
                 }
                 //generate between3and1
                 if (t.p3.X != t.p1.X)
                 {
-                    double u = rng.NextDouble();
-                    double slope = (t.p1.Y - t.p3.Y) / (t.p1.X - t.p3.X);
+                   // double u = rng.NextDouble();
+                    double slope = (double)(t.p1.Y - t.p3.Y) / (t.p1.X - t.p3.X);
                     double midX = ((t.p1.X - t.p3.X) * u + t.p3.X);
                     double midY = (slope * (midX - t.p3.X)) + t.p3.Y;
                     between3and1 = new Point((int)midX, (int)midY);
                 }
                 else
                 {
-                    double u = rng.NextDouble();
+                    //double u = rng.NextDouble();
                     double midY = ((t.p1.Y - t.p3.Y) * u )+ t.p3.Y;
                     between3and1 = new Point(t.p3.X, (int)midY);
                 }
