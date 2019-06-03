@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParticleCollision;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,6 +43,11 @@ namespace PhysicsApp
         private void tessellateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showForm(Canvas.Instance);
+        }
+
+        private void particleCollisionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showForm(Particle.Instance);
         }
     }
 }

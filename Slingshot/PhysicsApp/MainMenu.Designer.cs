@@ -33,6 +33,7 @@
             this.slingshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.waveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tessellateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.particleCollisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +53,8 @@
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.slingshotToolStripMenuItem,
             this.waveToolStripMenuItem,
-            this.tessellateToolStripMenuItem});
+            this.tessellateToolStripMenuItem,
+            this.particleCollisionToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(128, 29);
             this.toolStripMenuItem1.Text = "Physics Apps";
@@ -78,6 +80,13 @@
             this.tessellateToolStripMenuItem.Text = "Tessellate";
             this.tessellateToolStripMenuItem.Click += new System.EventHandler(this.tessellateToolStripMenuItem_Click);
             // 
+            // particleCollisionToolStripMenuItem
+            // 
+            this.particleCollisionToolStripMenuItem.Name = "particleCollisionToolStripMenuItem";
+            this.particleCollisionToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.particleCollisionToolStripMenuItem.Text = "Particle Collision";
+            this.particleCollisionToolStripMenuItem.Click += new System.EventHandler(this.particleCollisionToolStripMenuItem_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -102,6 +111,7 @@
         private System.Windows.Forms.ToolStripMenuItem slingshotToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem waveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tessellateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem particleCollisionToolStripMenuItem;
     }
 }
 
