@@ -10,16 +10,29 @@ namespace ParticleCollision
     {
         public int x;
         public int y;
-        public int slope;
+        public int xDir;
+        public int yDir;
         public int tickCreated;
-
-        public Ball(int startX, int startY, int _slope, int _tickCreated)
+        public int mass;
+        public Ball(int startX, int startY, int _xDir, int _yDir, int _tickCreated)
         {
             x = startX;
             y = startY;
-            slope = _slope;
+            xDir = _xDir;
+            yDir = _yDir;
             tickCreated = _tickCreated;
+            mass = 1;
         }
-        
+
+        public Ball(int startX, int startY, int _xDir, int _yDir, int _tickCreated, int _mass)
+        {
+            x = startX;
+            y = startY;
+            xDir = _xDir;
+            yDir = _yDir;
+            tickCreated = _tickCreated;
+            mass = _mass;
+        }
+
     }
 }
