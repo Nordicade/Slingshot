@@ -28,21 +28,26 @@ namespace ParticleCollision
 
         private void T_Tick(object sender, EventArgs e)
         {
-            tickCount++;
 
             foreach(Ball p in sList)
             {
-                
-                p.y = p.slope * (p.y +(tickCount - p.tickCreated));
                 p.x = p.x + (tickCount - p.tickCreated);
-                if(p.y >= this.Height || p.y <= 0)
+                p.y = p.y + p.slope * (tickCount - p.tickCreated);
+                if (p.y >= this.Height - 5 || p.y <= 0)
                 {
                     p.slope = -p.slope;
                     p.y = Math.Abs(p.y);
                     p.x = Math.Abs(p.x);
                 }
-                
+                if (p.x >= this.Width -5|| p.x <= 0)
+                {
+                    p.x = 
+                    p.y = Math.Abs(p.y);
+                }
+
             }
+            tickCount++;
+
             this.Refresh();
         }
 
@@ -84,8 +89,10 @@ namespace ParticleCollision
             Graphics g = this.CreateGraphics();
             //randomize initial slope
             Random rng = new Random();
-            int slope = rng.Next(-5, 5);
-            Ball b = new Ball(e.X, e.Y, slope, tickCount);
+            int randomizedSlope = rng.Next(-3, 3);
+            int slope = -2;
+            //Ball b = new Ball(e.X, e.Y, slope, tickCount);
+            Ball b = new Ball(e.X, e.Y, randomizedSlope, tickCount);
             sList.Add(b);
         }
     }
