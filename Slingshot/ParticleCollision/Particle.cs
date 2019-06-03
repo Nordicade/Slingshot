@@ -22,28 +22,34 @@ namespace ParticleCollision
             tickCount = 0;
             Timer t = new Timer();
             t.Start();
-            t.Interval = 100;
+            t.Interval = 150;
             t.Tick += T_Tick;
         }
 
         private void T_Tick(object sender, EventArgs e)
         {
-
+            
             foreach(Ball p in sList)
             {
                 p.x = p.x + (tickCount - p.tickCreated);
                 p.y = p.y + p.slope * (tickCount - p.tickCreated);
-                if (p.y >= this.Height - 5 || p.y <= 0)
+                if (p.y >= this.Height - 50 || p.y <= 0)
                 {
                     p.slope = -p.slope;
                     p.y = Math.Abs(p.y);
                     p.x = Math.Abs(p.x);
                 }
-                if (p.x >= this.Width -5|| p.x <= 0)
+                if (p.x >= this.Width -20|| p.x <= 0)
                 {
-                    p.x = 
+                    int delta = p.x % this.Width;
+                    p.x =
                     p.y = Math.Abs(p.y);
                 }
+                //if (p.x >= this.Width - 5 || p.x <= 0)
+                //{
+                //    p.x =
+                //    p.y = Math.Abs(p.y);
+                //}
 
             }
             tickCount++;

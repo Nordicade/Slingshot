@@ -34,55 +34,58 @@ namespace WaveSim
 
         private void T_Tick(object sender, EventArgs e)
         {
-            Graphics g = this.CreateGraphics();
-            tickCount++;
-            if (hasChanged || tickCount != 0)
+            if (IsDisposed == false)
             {
-                EraseOldWave();
-
-                //left square wave
-
-                int length = 360;
-                PointF[] leftPList = new PointF[length];
-                for (int i = 0; i < length; i++)
+                Graphics g = this.CreateGraphics();
+                tickCount++;
+                if (hasChanged || tickCount != 0)
                 {
-                    //double amplitude = 10;
-                    //double constant = 1000;
-                    //double frequency = 1;
+                    EraseOldWave();
 
-                    double amplitude = vScrollBar1.Value; //range from 1 to 50               
-                    double constant = 1;
-                    double scrollValue = (double) vScrollBar3.Value;              
-                   // double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1                   
-                    double frequency = scrollValue;
-                    // double y = amplitude * Math.Sin(constant * i - (frequency * i));
-                    double y = amplitude * Math.Sin(constant * i - (frequency * tickCount));
-                    leftPList[i] = new PointF(40 + i, 140 + (float)y);
-                    for (int index = 0; index < length; index++)
+                    //left square wave
+
+                    int length = 360;
+                    PointF[] leftPList = new PointF[length];
+                    for (int i = 0; i < length; i++)
                     {
-                        toBeRemovedL[index] = leftPList[index];
+                        //double amplitude = 10;
+                        //double constant = 1000;
+                        //double frequency = 1;
+
+                        double amplitude = vScrollBar1.Value; //range from 1 to 50               
+                        double constant = 1;
+                        double scrollValue = (double)vScrollBar3.Value;
+                        // double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1                   
+                        double frequency = scrollValue;
+                        // double y = amplitude * Math.Sin(constant * i - (frequency * i));
+                        double y = amplitude * Math.Sin(constant * i - (frequency * tickCount));
+                        leftPList[i] = new PointF(40 + i, 140 + (float)y);
+                        for (int index = 0; index < length; index++)
+                        {
+                            toBeRemovedL[index] = leftPList[index];
+                        }
                     }
-                }
-                g.DrawLines(new Pen(Brushes.Black), leftPList);
+                    g.DrawLines(new Pen(Brushes.Black), leftPList);
 
-                //right square wave
+                    //right square wave
 
-                PointF[] rightPList = new PointF[length];
-                for (int i = 0; i < length; i++)
-                {
-                    double amplitude = vScrollBar2.Value;  //range from 1 to 50
-                    double constant = 1;
-                    double scrollValue = (double)vScrollBar4.Value;
-                    double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1
-                    double y = amplitude * Math.Sin(constant * i - (frequency * tickCount));
-                    rightPList[i] = new PointF(410 + i, 140 + (float)y);
-                    for (int index = 0; index < length; index++)
+                    PointF[] rightPList = new PointF[length];
+                    for (int i = 0; i < length; i++)
                     {
-                        toBeRemovedR[index] = rightPList[index];
+                        double amplitude = vScrollBar2.Value;  //range from 1 to 50
+                        double constant = 1;
+                        double scrollValue = (double)vScrollBar4.Value;
+                        double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1
+                        double y = amplitude * Math.Sin(constant * i - (frequency * tickCount));
+                        rightPList[i] = new PointF(410 + i, 140 + (float)y);
+                        for (int index = 0; index < length; index++)
+                        {
+                            toBeRemovedR[index] = rightPList[index];
+                        }
                     }
+                    g.DrawLines(new Pen(Brushes.Black), rightPList);
+                    hasChanged = false;
                 }
-                g.DrawLines(new Pen(Brushes.Black), rightPList);
-                hasChanged = false;
             }
         }
 

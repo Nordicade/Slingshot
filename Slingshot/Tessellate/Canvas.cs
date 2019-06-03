@@ -150,6 +150,12 @@ namespace Tessellate
             _instance = null;
             this.Dispose();
         }
+
+        private void Canvas_MouseClick(object sender, MouseEventArgs e)
+        {
+            tList.Clear();
+            this.Refresh();
+        }
     }
   
 }

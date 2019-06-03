@@ -39,6 +39,7 @@
             this.Text = "Tessellate";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Canvas_FormClosed);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseClick);
             this.ResumeLayout(false);
 
         }
