@@ -117,21 +117,23 @@
             // vScrollBar3
             // 
             this.vScrollBar3.Location = new System.Drawing.Point(9, 228);
-            this.vScrollBar3.Maximum = 109;
+            this.vScrollBar3.Maximum = 209;
+            this.vScrollBar3.Minimum = 4;
             this.vScrollBar3.Name = "vScrollBar3";
             this.vScrollBar3.Size = new System.Drawing.Size(30, 148);
             this.vScrollBar3.TabIndex = 7;
-            this.vScrollBar3.Value = 15;
+            this.vScrollBar3.Value = 4;
             this.vScrollBar3.ValueChanged += new System.EventHandler(this.vScrollBar3_ValueChanged);
             // 
             // vScrollBar4
             // 
             this.vScrollBar4.Location = new System.Drawing.Point(1171, 228);
-            this.vScrollBar4.Maximum = 109;
+            this.vScrollBar4.Maximum = 163;
+            this.vScrollBar4.Minimum = 4;
             this.vScrollBar4.Name = "vScrollBar4";
             this.vScrollBar4.Size = new System.Drawing.Size(30, 148);
             this.vScrollBar4.TabIndex = 8;
-            this.vScrollBar4.Value = 55;
+            this.vScrollBar4.Value = 4;
             this.vScrollBar4.ValueChanged += new System.EventHandler(this.vScrollBar4_ValueChanged);
             // 
             // Wave

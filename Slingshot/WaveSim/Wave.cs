@@ -56,9 +56,10 @@ namespace WaveSim
                         double constant = 1;
                         double scrollValue = (double)vScrollBar3.Value;
                         // double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1                   
-                        double frequency = scrollValue;
+                        double frequency = Math.PI / scrollValue;
+                        textBox3.Text = "frequency: Pi/"+scrollValue;
                         // double y = amplitude * Math.Sin(constant * i - (frequency * i));
-                        double y = amplitude * Math.Sin(constant * i - (frequency * tickCount));
+                        double y = amplitude * Math.Sin((constant * tickCount) - (frequency * i));
                         leftPList[i] = new PointF(40 + i, 140 + (float)y);
                         for (int index = 0; index < length; index++)
                         {
@@ -75,8 +76,10 @@ namespace WaveSim
                         double amplitude = vScrollBar2.Value;  //range from 1 to 50
                         double constant = 1;
                         double scrollValue = (double)vScrollBar4.Value;
-                        double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1
-                        double y = amplitude * Math.Sin(constant * i - (frequency * tickCount));
+                        textBox2.Text = "frequency: Pi/" + scrollValue;
+                        //double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1
+                        double frequency = Math.PI / scrollValue;
+                        double y = amplitude * Math.Sin((constant * tickCount) - (frequency * i));
                         rightPList[i] = new PointF(410 + i, 140 + (float)y);
                         for (int index = 0; index < length; index++)
                         {
@@ -144,15 +147,13 @@ namespace WaveSim
         //handles vscrollbar value change for Botright (textbox2)
         private void vScrollBar4_ValueChanged(object sender, EventArgs e)
         {
-              int left2ScrollValue = vScrollBar4.Value;
-              textBox2.Text = "Frequency:"+ left2ScrollValue.ToString();
+           
               hasChanged = true;
         }
         //handles vscrollbar value change for topleft
         private void vScrollBar3_ValueChanged(object sender, EventArgs e)
         {
-            int right2ScrollValue = vScrollBar3.Value;
-            textBox3.Text = "Frequency:" + right2ScrollValue.ToString();
+          
             hasChanged = true;
         }
 

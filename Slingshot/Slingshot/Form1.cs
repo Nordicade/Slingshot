@@ -26,6 +26,7 @@ namespace Slingshot
 
         public string status;
         Boolean pressed;
+        int tickCount;
 
         public Form1()
         {
@@ -36,7 +37,16 @@ namespace Slingshot
             this.MouseUp += Form1_MouseUp;
             this.button1.Click += Form1_Button1_Click;
             this.Size = new System.Drawing.Size(800, 600);
+            tickCount = 0;
+            Timer t = new Timer();
+            t.Start();
+            t.Tick += T_Tick;
             status = "Line";
+        }
+
+        private void T_Tick(object sender, EventArgs e)
+        {
+            tickCount++;
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -104,10 +114,16 @@ namespace Slingshot
                     //double scrollValue = (double)vScrollBar4.Value;
                     //double frequency = scrollValue * Math.Pow(10, -3);  //range from .015 to 1
 
-                    double amplitude = 100;
+                   
+
+                    double amplitude = 10;
                     double constant = 1;
-                    double frequency = 5;
-                    double y = amplitude * Math.Sin((constant * i) - (frequency * i));
+                    //double frequency = 5;
+                    int.TryParse(textBox1.Text, out int multiplier);
+                    double frequency = Math.PI / multiplier;
+                    double y = amplitude * Math.Sin((constant * tickCount) - (frequency * i));
+                    //double y = amplitude * Math.Sin((constant * i) - (frequency * i));
+
                     //double y = amplitude * Math.Sin(constant * i);
                     pList[i] = new PointF(i + e.X , e.Y + (float) y);
                 }
