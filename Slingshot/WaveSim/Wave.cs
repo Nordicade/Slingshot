@@ -15,8 +15,11 @@ namespace WaveSim
         public static Wave _instance;
         PointF[] toBeRemovedL;
         PointF[] toBeRemovedR;
+        PointF[] lWave;
+        PointF[] rWave;
         Boolean hasChanged;
         int tickCount;
+        Boolean merge;
 
         public Wave()
         {
@@ -25,69 +28,94 @@ namespace WaveSim
             this.Size = new Size(840, 700);
             toBeRemovedL = new PointF[360];
             toBeRemovedR = new PointF[360];
-            Timer t = new Timer();
+            Timer t = new Timer();        
             t.Start();
             t.Interval = 100;
             t.Tick += T_Tick;
             hasChanged = true;
+            merge = false;
         }
 
         private void T_Tick(object sender, EventArgs e)
         {
             if (IsDisposed == false)
             {
+               
                 Graphics g = this.CreateGraphics();
                 tickCount++;
-                if (hasChanged || tickCount != 0)
+                if (merge == false)
+                {
+                    if (hasChanged || tickCount != 0)
+                    {
+                        EraseOldWave();
+
+                        //left square wave
+
+                        int length = 360;
+                        PointF[] leftPList = new PointF[length];
+                        for (int i = 0; i < length; i++)
+                        {
+                            //double amplitude = 10;
+                            //double constant = 1000;
+                            //double frequency = 1;
+
+                            double amplitude = vScrollBar1.Value; //range from 1 to 50               
+                            double constant = 1;
+                            double scrollValue = (double)vScrollBar3.Value;
+                            // double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1                   
+                            double frequency = Math.PI / scrollValue;
+                            textBox3.Text = "frequency: Pi/" + scrollValue;
+                            // double y = amplitude * Math.Sin(constant * i - (frequency * i));
+                            double y = amplitude * Math.Sin((constant * tickCount) - (frequency * i));
+                            leftPList[i] = new PointF(40 + i, 140 + (float)y);
+                            for (int index = 0; index < length; index++)
+                            {
+                                toBeRemovedL[index] = leftPList[index];
+                            }
+                        }
+                        g.DrawLines(new Pen(Brushes.Black), leftPList);
+
+                        //right square wave
+
+                        PointF[] rightPList = new PointF[length];
+                        for (int i = 0; i < length; i++)
+                        {
+                            double amplitude = vScrollBar2.Value;  //range from 1 to 50
+                            double constant = 1;
+                            double scrollValue = (double)vScrollBar4.Value;
+                            textBox2.Text = "frequency: Pi/" + scrollValue;
+                            //double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1
+                            double frequency = Math.PI / scrollValue;
+                            double y = amplitude * Math.Sin((constant * tickCount) - (frequency * i));
+                            rightPList[i] = new PointF(410 + i, 140 + (float)y);
+                            for (int index = 0; index < length; index++)
+                            {
+                                toBeRemovedR[index] = rightPList[index];
+                            }
+                        }
+                        g.DrawLines(new Pen(Brushes.Black), rightPList);
+                        hasChanged = false;
+                    }
+                }
+                else
                 {
                     EraseOldWave();
-
-                    //left square wave
-
-                    int length = 360;
-                    PointF[] leftPList = new PointF[length];
-                    for (int i = 0; i < length; i++)
+                    //handle updating the merge wave
+                    toBeRemovedL = lWave;
+                    toBeRemovedR = rWave;
+                    //g.DrawLines(new Pen(Brushes.Black), rWave);
+                    for (int i = 0; i < 360; i++)
                     {
-                        //double amplitude = 10;
-                        //double constant = 1000;
-                        //double frequency = 1;
-
-                        double amplitude = vScrollBar1.Value; //range from 1 to 50               
-                        double constant = 1;
-                        double scrollValue = (double)vScrollBar3.Value;
-                        // double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1                   
-                        double frequency = Math.PI / scrollValue;
-                        textBox3.Text = "frequency: Pi/"+scrollValue;
-                        // double y = amplitude * Math.Sin(constant * i - (frequency * i));
-                        double y = amplitude * Math.Sin((constant * tickCount) - (frequency * i));
-                        leftPList[i] = new PointF(40 + i, 140 + (float)y);
-                        for (int index = 0; index < length; index++)
-                        {
-                            toBeRemovedL[index] = leftPList[index];
-                        }
+                        lWave[i].X = lWave[i].X + 5;
+                        rWave[i].X = rWave[i].X - 5;
+                        
                     }
-                    g.DrawLines(new Pen(Brushes.Black), leftPList);
+                    g.DrawLines(new Pen(Brushes.Black), lWave);
+                    g.DrawLines(new Pen(Brushes.Black), rWave);
 
-                    //right square wave
+                    g.DrawLine(new Pen(Brushes.Black), 0, 460, 820, 460);
 
-                    PointF[] rightPList = new PointF[length];
-                    for (int i = 0; i < length; i++)
-                    {
-                        double amplitude = vScrollBar2.Value;  //range from 1 to 50
-                        double constant = 1;
-                        double scrollValue = (double)vScrollBar4.Value;
-                        textBox2.Text = "frequency: Pi/" + scrollValue;
-                        //double frequency = scrollValue * Math.Pow(10, 3);  //range from .015 to 1
-                        double frequency = Math.PI / scrollValue;
-                        double y = amplitude * Math.Sin((constant * tickCount) - (frequency * i));
-                        rightPList[i] = new PointF(410 + i, 140 + (float)y);
-                        for (int index = 0; index < length; index++)
-                        {
-                            toBeRemovedR[index] = rightPList[index];
-                        }
-                    }
-                    g.DrawLines(new Pen(Brushes.Black), rightPList);
-                    hasChanged = false;
+
                 }
             }
         }
@@ -106,7 +134,37 @@ namespace WaveSim
                 g.DrawLines(new Pen(Brushes.White), toBeRemovedR);
                 toBeRemovedR = new PointF[360];
             }
+            if (merge)
+            {
+                Graphics g = this.CreateGraphics();             
+                g.DrawLines(new Pen(Brushes.White), toBeRemovedL);
+                toBeRemovedL = new PointF[360];
+            }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Graphics g = this.CreateGraphics();
+            button1.Enabled = false;
+            merge = true;
+            //retrieve values for left and right wave 
+            double lFrequency = Math.PI / vScrollBar3.Value;
+            double lAmplitude = vScrollBar1.Value;
+
+            double rFrequency = Math.PI / vScrollBar4.Value;
+            double rAmplitude = vScrollBar2.Value;
+
+            int rectLength = 360;
+            lWave = new PointF[rectLength];
+            rWave = new PointF[rectLength];
+
+            for(int i = 0; i < rectLength; i++)
+            {
+                lWave[i] = new PointF (i - 100, (int) (lAmplitude * Math.Sin(tickCount - (lFrequency * i))) + 460);
+                rWave[i] = new PointF ( i+ 600, (int) (rAmplitude * Math.Sin(tickCount - (rFrequency * i)))+ 460);
+                
+            }
         }
 
         public static Wave Instance
@@ -164,10 +222,11 @@ namespace WaveSim
             g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(40, 40, 360, 200));
             g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(410, 40, 360, 200));
             g.DrawRectangle(new Pen(Brushes.Black), new Rectangle(0, 260, 820, 400));
+            g.DrawLine(new Pen(Brushes.Black), 0, 460, 820, 460);
 
             //draw x axis for all 3 windows
 
-           
+
 
         }
         private void vScrollBar1_Enter(object sender, EventArgs e)

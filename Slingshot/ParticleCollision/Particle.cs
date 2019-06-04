@@ -37,17 +37,17 @@ namespace ParticleCollision
             {
                 p.x = p.x + (p.xDir / p.mass);
                 p.y = p.y + (p.yDir / p.mass);
-                if(p.x >= this.Width - 25 || p.x <= 0)
+                if (p.x >= this.Width - 25 || p.x <= 0)
                 {
                     p.xDir = p.xDir * -1;
                 }
-                if (p.y >= this.Height -45|| p.y <= 0)
+                if (p.y >= this.Height - 45 || p.y <= 0)
                 {
                     p.yDir = p.yDir * -1;
                 }
-                foreach(Ball q in sList)
+                foreach (Ball q in sList)
                 {
-                    if(Math.Abs(q.x - p.x) <= (5) && !p.Equals(q) && Math.Abs(q.y - p.y) <= 5)
+                    if (Math.Abs(q.x - p.x) <= (5) && !p.Equals(q) && Math.Abs(q.y - p.y) <= 5)
                     {
                         if (Math.Abs(p.yDir + q.yDir) != 2)
                         {
@@ -60,9 +60,9 @@ namespace ParticleCollision
                             q.xDir = q.xDir * -1;
                         }
                     }
-                }                            
+                }
             }
-  
+
             tickCount++;
 
             this.Refresh();
